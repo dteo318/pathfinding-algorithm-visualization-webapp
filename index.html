@@ -4,7 +4,12 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Pathfinder</title>
+    <title>Pathfinder Visualization</title>
+    <!-- Materialize Icons -->
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
     <!-- Materialize CSS -->
     <link
       rel="stylesheet"
@@ -13,9 +18,81 @@
     <link rel="stylesheet" href="./style.css" />
   </head>
   <body>
-    <h1>Hello world!</h1>
+    <!-- Materialize navigation bar -->
+    <!-- Dropdown structure and elements-->
+    <ul id="algorithm-selection" class="dropdown-content cyan lighten-5">
+      <li><a href="#!">A* Pathfinding</a></li>
+      <li class="divider"></li>
+      <li><a href="#!">Dijkstra's Algorithm</a></li>
+      <li><a href="#!">Greedy Best-first Search</a></li>
+      <li><a href="#!">Swarm Algorithm</a></li>
+      <li><a href="#!">Convergent Swarm Algorithm</a></li>
+      <li><a href="#!">Bidirectional Swarm Algorithm</a></li>
+      <li><a href="#!">Breadth-first Search</a></li>
+      <li><a href="#!">Depth-first Search</a></li>
+    </ul>
+    <ul id="maze-selection" class="dropdown-content cyan lighten-5">
+      <li><a href="#!">Recursive Division</a></li>
+      <li class="divider"></li>
+      <li><a href="#!">Recursive Division (Vertical Skew)</a></li>
+      <li><a href="#!">Recursive Division (Horizontal Skew)</a></li>
+      <li><a href="#!">Basic Random Maze</a></li>
+      <li><a href="#!">Basic Weight Maze</a></li>
+      <li><a href="#!">Simple Stair Pattern</a></li>
+    </ul>
+    <!-- Navigation bar structure -->
+    <nav class="light-blue darken-4">
+      <div class="nav-wrapper">
+        <a href="#!" class="brand-logo">Pathfinder Visualization</a>
+        <!-- Navigation bar elements -->
+        <ul class="right hide-on-med-and-down">
+          <!-- Algorithms Dropdown Trigger -->
+          <li>
+            <a
+              class="dropdown-trigger"
+              href="#!"
+              data-target="algorithm-selection"
+              >Algorithms<i class="material-icons right">arrow_drop_down</i></a
+            >
+          </li>
+          <!-- Mazes Dropdown Trigger -->
+          <li>
+            <a class="dropdown-trigger" href="#!" data-target="maze-selection"
+              >Mazes & Patterns<i class="material-icons right"
+                >arrow_drop_down</i
+              ></a
+            >
+          </li>
+          <li><a href="#!">Add Bomb</a></li>
+          <!-- Button to start visualizer -->
+          <li><a href="#!" id="start-visualizer">Visualize!</a></li>
+          <li><a href="#!">Clear Board</a></li>
+          <li><a href="#!">Clear Walls & Weights</a></li>
+          <li><a href="#!">Clear Path</a></li>
+          <!-- To adjust visualizer speed -->
+          <li><a href="#!">Speed: Fast</a></li>
+        </ul>
+      </div>
+    </nav>
+    <!-- Identifying what each icon means -->
+    <div id="icons-bar">
+      <p>hello world</p>
+    </div>
+    <!-- Grid for drawing path -->
+    <div id="path-grid">
+      <p>hello world 2</p>
+    </div>
+    <!-- JQuery -->
+    <script
+      src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"
+      type="text/javascript"
+    ></script>
     <!-- Materialize JS -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="./materialize.js"></script>
+    <!-- To initialize and set up Materialize CSS animations -->
+    <script src="./materialize-interactions.js"></script>
+    <!-- For main page interactivity -->
     <script src="./main.js"></script>
+    <!-- For pathfinding algorithms -->
   </body>
 </html>
