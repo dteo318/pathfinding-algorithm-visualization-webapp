@@ -82,9 +82,59 @@
       </div>
     </nav>
     <!-- Identifying what each icon means -->
-    <div id="icons-bar"></div>
+    <div id="menu">
+      <div id="icons-bar">
+        <div class="icon-item">
+          <i class="material-icons medium-small-icon">keyboard_arrow_right</i>
+          <p>Start Node</p>
+        </div>
+        <div class="icon-item">
+          <i class="material-icons small">adjust</i>
+          <p>Target Node</p>
+        </div>
+        <div class="icon-item">
+          <img
+            src="./images/unvisited-node.png"
+            alt="shortest path node icon"
+            class="img-icon"
+          />
+          <p>Unvisited Node</p>
+        </div>
+        <div class="icon-item">
+          <img
+            src="./images/visited-node-1.png"
+            alt="shortest path node icon"
+            class="img-icon"
+          />
+          <img
+            src="./images/visited-node-2.png"
+            alt="shortest path node icon"
+            class="img-icon"
+          />
+          <p>Visited Nodes</p>
+        </div>
+        <div class="icon-item">
+          <img
+            src="./images/wall-node.png"
+            alt="shortest path node icon"
+            class="img-icon"
+          />
+          <p>Wall Node</p>
+        </div>
+        <div class="icon-item">
+          <img
+            src="./images/shortest-path-node.png"
+            alt="shortest path node icon"
+            class="img-icon"
+          />
+          <p>Shortest Path Node</p>
+        </div>
+      </div>
+      <p>Start drawing your map...</p>
+    </div>
     <!-- Grid for drawing path -->
     <div id="path-grid"></div>
+    <!-- JS scripts -->
     <!-- JQuery -->
     <script
       src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"
