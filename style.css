@@ -7,29 +7,31 @@
   box-sizing: border-box;
 }
 
+body {
+  height: 100vh;
+}
+
+nav {
+  height: 6.5%;
+}
+
 #icons-bar {
   padding: 1rem 3rem;
-  height: 15vh;
+  height: 13.5%;
   /* Temporary border for easier designing */
   border: 1px black solid;
 }
-/* 
-#path-grid {
-  height: 100vh;
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  grid-template-rows: repeat(5, 1fr);
-} */
 
 #path-grid {
   display: grid;
   grid-template-rows: repeat(var(--grid-rows), 1fr);
   grid-template-columns: repeat(var(--grid-cols), 1fr);
   margin: 0;
+  height: 80%;
 }
-/* TODO Add height and width (maybe) variable to make it more responsive */
+
 .grid-item {
-  border: 1px solid #4fc3f7;
+  border: 1px solid #e1f5fe;
   text-align: center;
-  height: 2.525vh;
+  height: 100%;
 }

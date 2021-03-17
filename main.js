@@ -8,7 +8,7 @@ function makeRows(rows, cols) {
   }
 }
 
-const GRID_ROWS = 31;
+const GRID_ROWS = 20;
 const GRID_COLUMNS = 40;
 
 makeRows(GRID_ROWS, GRID_COLUMNS);
