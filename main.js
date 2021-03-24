@@ -18,10 +18,22 @@ function toggleEndNode(target_node) {
   target_node.style.backgroundColor = "red"; // TODO Change to end img icon
 }
 
+function appendGridArrayNode(grid_array, current_row_num) {
+  if (grid_array.length - 1 < current_row_num) {
+    grid_array.push([]);
+  }
+  const current_row = grid_array[current_row_num];
+  current_row.push(0);
+}
+
 function drawWall(e) {
-  target_grid_box = e.target;
+  const target_grid_box = e.target;
+  const cell_row = target_grid_box.id.split("_")[1];
+  const cell_col = target_grid_box.id.split("_")[2];
   if (!mouse_clicked) return;
-  console.log(target_grid_box.id);
+
+  grid_array[cell_row][cell_col] = 1;
+
   // Handling start and end nodes
   if (!start_node || target_grid_box.id == start_node) {
     toggleStartNode(target_grid_box);
@@ -45,6 +57,7 @@ function drawWall(e) {
 }
 
 function makeRows(rows, cols) {
+  let grid_array = [[]];
   const grid_container = document.getElementById("path-grid");
   // Setting display:grid number of rows and columns
   grid_container.style.setProperty("--grid-rows", rows);
@@ -52,9 +65,14 @@ function makeRows(rows, cols) {
 
   for (let c = 0; c < rows * cols; c++) {
     const grid_box = document.createElement("div");
+    // Calculating cell row and column to create ID
     const cell_row = Math.floor(c / cols);
     const cell_column = c % cols;
     const grid_box_id = `cell_${cell_row}_${cell_column}`;
+
+    // Creating grid array
+    appendGridArrayNode(grid_array, cell_row);
+
     // Adding event listeners for drawing capability
     grid_box.addEventListener("mousedown", function (e) {
       mouse_clicked = true;
@@ -72,12 +90,15 @@ function makeRows(rows, cols) {
     grid_box.setAttribute("id", grid_box_id);
     grid_container.appendChild(grid_box);
   }
+
+  return grid_array;
 }
 
 const GRID_ROWS = 20;
 const GRID_COLUMNS = 40;
 let mouse_clicked = false;
+
 let start_node = null;
 let end_node = null;
 
-makeRows(GRID_ROWS, GRID_COLUMNS);
+let grid_array = makeRows(GRID_ROWS, GRID_COLUMNS);
