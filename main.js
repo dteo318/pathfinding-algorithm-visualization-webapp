@@ -1,59 +1,85 @@
-function toggleStartNode(target_node) {
-  if (target_node.id == start_node) {
-    start_node = null;
-    target_grid_box.style.backgroundColor = "";
-    return;
+class Node {
+  constructor(row, col) {
+    this.row = row;
+    this.col = col;
+    // A* Algorithm Scores
+    this.f_score = null;
+    this.g_score = null;
+    this.h_score = null;
+    // Cell properties
+    this.is_wall = false;
+    this.is_start_end = false;
   }
-  start_node = target_node.id;
-  target_node.style.backgroundColor = "green"; // TODO Change to start img icon
+
+  toggleWallNode(target_grid_box) {
+    if (this.is_start_end) return;
+
+    if (this.is_wall) {
+      target_grid_box.className = target_grid_box.className.replace(
+        "wall-node",
+        ""
+      );
+      this.is_wall = false;
+      target_grid_box.className += "grid-item";
+    } else {
+      target_grid_box.className = "wall-node";
+      this.is_wall = true;
+    }
+  }
+
+  toggleStartNode(target_grid_box) {
+    if (target_grid_box.id == start_node) {
+      start_node = null;
+      target_grid_box.style.backgroundColor = "";
+      this.is_start_end = true;
+      return;
+    }
+    start_node = target_grid_box.id;
+    target_grid_box.style.backgroundColor = "green"; // TODO Change to start img icon
+    this.is_start_end = false;
+  }
+
+  toggleEndNode(target_grid_box) {
+    if (target_grid_box.id == end_node) {
+      end_node = null;
+      target_grid_box.style.backgroundColor = "";
+      this.is_start_end = true;
+      return;
+    }
+    end_node = target_grid_box.id;
+    target_grid_box.style.backgroundColor = "red"; // TODO Change to end img icon
+    this.is_start_end = false;
+  }
 }
 
-function toggleEndNode(target_node) {
-  if (target_node.id == end_node) {
-    end_node = null;
-    target_grid_box.style.backgroundColor = "";
-    return;
-  }
-  end_node = target_node.id;
-  target_node.style.backgroundColor = "red"; // TODO Change to end img icon
-}
-
-function appendGridArrayNode(grid_array, current_row_num) {
-  if (grid_array.length - 1 < current_row_num) {
+function appendGridArrayNode(grid_array, row, column) {
+  if (grid_array.length - 1 < row) {
     grid_array.push([]);
   }
-  const current_row = grid_array[current_row_num];
-  current_row.push(0);
+  const row_array = grid_array[row];
+  const node = new Node(row, column);
+  row_array.push(node);
 }
 
 function drawWall(e) {
   const target_grid_box = e.target;
   const cell_row = target_grid_box.id.split("_")[1];
   const cell_col = target_grid_box.id.split("_")[2];
+  const selected_node = grid_array[cell_row][cell_col];
   if (!mouse_clicked) return;
-
-  grid_array[cell_row][cell_col] = 1;
 
   // Handling start and end nodes
   if (!start_node || target_grid_box.id == start_node) {
-    toggleStartNode(target_grid_box);
+    selected_node.toggleStartNode(target_grid_box);
     return;
   }
   if (!end_node || target_grid_box.id == end_node) {
-    toggleEndNode(target_grid_box);
+    selected_node.toggleEndNode(target_grid_box);
     return;
   }
 
   // Making toggling wall node on target node
-  if (target_grid_box.className.includes("wall-node")) {
-    target_grid_box.className = target_grid_box.className.replace(
-      "wall-node",
-      ""
-    );
-    target_grid_box.className += "grid-item";
-  } else {
-    target_grid_box.className = "wall-node";
-  }
+  selected_node.toggleWallNode(target_grid_box);
 }
 
 function makeRows(rows, cols) {
@@ -71,7 +97,7 @@ function makeRows(rows, cols) {
     const grid_box_id = `cell_${cell_row}_${cell_column}`;
 
     // Creating grid array
-    appendGridArrayNode(grid_array, cell_row);
+    appendGridArrayNode(grid_array, cell_row, cell_column);
 
     // Adding event listeners for drawing capability
     grid_box.addEventListener("mousedown", function (e) {
