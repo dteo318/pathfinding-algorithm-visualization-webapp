@@ -21,7 +21,7 @@ function toggleEndNode(target_node) {
 function drawWall(e) {
   target_grid_box = e.target;
   if (!mouse_clicked) return;
-
+  console.log(target_grid_box.id);
   // Handling start and end nodes
   if (!start_node || target_grid_box.id == start_node) {
     toggleStartNode(target_grid_box);
@@ -50,9 +50,11 @@ function makeRows(rows, cols) {
   grid_container.style.setProperty("--grid-rows", rows);
   grid_container.style.setProperty("--grid-cols", cols);
 
-  for (let c = 1; c <= rows * cols; c++) {
+  for (let c = 0; c < rows * cols; c++) {
     const grid_box = document.createElement("div");
-    const grid_box_id = "grid_cell_" + c;
+    const cell_row = Math.floor(c / cols);
+    const cell_column = c % cols;
+    const grid_box_id = `cell_${cell_row}_${cell_column}`;
     // Adding event listeners for drawing capability
     grid_box.addEventListener("mousedown", function (e) {
       mouse_clicked = true;
