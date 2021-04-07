@@ -130,6 +130,28 @@ function triggerSearch() {
   };
 }
 
+function resetBoard() {
+  const clearBoardButton = document.getElementById("clear-board");
+  const board = document.getElementById("path-grid");
+
+  // Reset board
+  clearBoardButton.onclick = function (event) {
+    // Prevent clearing board when search started
+    if (pathfinder_started) return;
+
+    // Remove drawn path
+    board.innerHTML = "";
+    // Reset variables
+    mouse_clicked = false;
+    start_node = null;
+    end_node = null;
+    // Recreate grid
+    grid_array = makeRows(GRID_ROWS, GRID_COLUMNS);
+
+    console.log("Board cleared!");
+  };
+}
+
 const GRID_ROWS = 20;
 const GRID_COLUMNS = 40;
 let mouse_clicked = false;
@@ -141,3 +163,4 @@ let pathfinder_started = false; // TODO Needs to be reset when pathfinder search
 let grid_array = makeRows(GRID_ROWS, GRID_COLUMNS);
 
 triggerSearch();
+resetBoard();
