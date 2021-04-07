@@ -66,7 +66,9 @@ function drawWall(e) {
   const cell_row = target_grid_box.id.split("_")[1];
   const cell_col = target_grid_box.id.split("_")[2];
   const selected_node = grid_array[cell_row][cell_col];
-  if (!mouse_clicked) return;
+
+  // Preventing changes to board if mouse not clicked or if search started
+  if (!mouse_clicked || pathfinder_started) return;
 
   // Handling start and end nodes
   if (!start_node || target_grid_box.id == start_node) {
@@ -127,4 +129,12 @@ let mouse_clicked = false;
 let start_node = null;
 let end_node = null;
 
+let pathfinder_started = false; // TODO Needs to be reset when pathfinder search is done
+
 let grid_array = makeRows(GRID_ROWS, GRID_COLUMNS);
+
+document.body.onkeypress = function (event) {
+  if (event.keyCode == 32 && !pathfinder_started) {
+    pathfinder_started = true;
+  }
+};
