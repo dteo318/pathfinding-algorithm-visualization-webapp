@@ -122,6 +122,14 @@ function makeRows(rows, cols) {
   return grid_array;
 }
 
+function triggerSearch() {
+  const startSearchButton = document.getElementById("start-visualizer");
+  startSearchButton.onclick = function (event) {
+    console.log("Search started!");
+    pathfinder_started = true;
+  };
+}
+
 const GRID_ROWS = 20;
 const GRID_COLUMNS = 40;
 let mouse_clicked = false;
@@ -130,11 +138,6 @@ let start_node = null;
 let end_node = null;
 
 let pathfinder_started = false; // TODO Needs to be reset when pathfinder search is done
-
 let grid_array = makeRows(GRID_ROWS, GRID_COLUMNS);
 
-document.body.onkeypress = function (event) {
-  if (event.keyCode == 32 && !pathfinder_started) {
-    pathfinder_started = true;
-  }
-};
+triggerSearch();
